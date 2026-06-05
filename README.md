@@ -13,9 +13,9 @@
 2. Ajuste as variáveis de ambiente em `.env`, sendo elas:
    - **CPUS**: quantidade de CPUs disponibilizadas para o container durante a simulação
    - **MEMORY**: quantidade de memória disponibilizada para o container durante a simulação
-   - **GEM5_JOBS**: quantidade de threads disponibilizadas para a _compilação do gem5 apenas_
+   - **GEM5_JOBS**: quantidade de threads disponibilizadas para a _**compilação** do gem5 apenas_
 3. `make build` no terminal — isso vai clonar o gem5 e compilar a imagem Docker
-4. Coloque seu arquivo `.s` (assembly RISC-V) e o script Python de simulação na pasta `./workloads`
+4. Coloque seu arquivo `.s` (assembly RISC-V) e o script Python `.py` de simulação na pasta `./workloads`. Use o nome padrão `main.s` e `sim.py` ou use nomes customizados (nesse caso, é necessário passar o nome customizado dos arquivos através dos parâmetros `FILE` e `SIM`)
 5. Para compilar e rodar:
 
 ```bash
@@ -42,7 +42,7 @@ make compile-and-run FILE=nome_do_arquivo SIM=outro_sim  # usa outro script
 
 ### IMPORTANTE
 
-- **Compilação pode demorar de 30 min a 2 horas** dependendo dos JOBS disponibilizados. Uma regra simples: `RAM livre no sistema / 2`. Recomenda-se fechar todas as outras aplicações antes de rodar `make build`.
+- **Compilação pode demorar de 30 min a 2 horas** dependendo dos JOBS disponibilizados. Uma regra simples para definir quantos JOBs usar: `JOBS = RAM livre no sistema / 2`. Recomenda-se fechar todas as outras aplicações antes de rodar `make build`, para que mais RAM esteja disponível, portanto, aumentando a quantidade de JOBs possíveis.
 - O binário gerado (`nome.riscv`) fica salvo em `./workloads` — se já existir, o `compile-and-run` **sempre recompila** por padrão.
 - Os resultados da simulação são salvos em `./results`.
 - Para sair do shell, digite `exit` — o container fecha automaticamente.
