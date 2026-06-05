@@ -1,0 +1,27 @@
+  services:
+    gem5:
+      build: .
+      container_name: gem5-sim
+      hostname: gem5-dev
+      stdin_open: true
+      tty: true
+      command: bash
+      volumes:
+        - ./results:/results
+        - ./workloads:/workloads
+      working_dir: /gem5
+      environment:
+        - LANG=${LANG}
+        - LC_ALL=${LC_ALL}
+        - GEM5_JOBS=${GEM5_JOBS}
+      restart: "no"
+      privileged: false
+      security_opt:
+        - seccomp:unconfined
+      deploy:
+        resources:
+          limits:
+            cpus: '${CPUS}'
+            memory: ${MEMORY}
+
+  volumes: {}
