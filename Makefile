@@ -49,7 +49,7 @@ compile:
 
 run:
 	docker compose run --rm -w /workloads gem5 \
-		bash -c "/gem5/build/RISCV/gem5.opt /workloads/$(SIM).py --binary /workloads/$(FILE).riscv"
+		bash -c "/gem5/build/RISCV/gem5.opt --outdir=/results /workloads/$(SIM).py --binary /workloads/$(FILE).riscv"
 		
 compile-and-run:
 	$(MAKE) compile FILE=$(FILE)
